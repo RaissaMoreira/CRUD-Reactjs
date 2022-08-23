@@ -8,7 +8,7 @@ import {
   Grid,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import {validEmail, validString, validName} from '../validation/validate';
+import { validEmail, validString, validName } from "../validation/validate";
 
 // styles
 const useStyles = makeStyles({
@@ -22,33 +22,32 @@ const useStyles = makeStyles({
     width: "90%",
     padding: "25px",
 
-    '& > p': {
-      color: '#009ADF',
-      backgroundColor: '#94dbfc',
-      padding: '10px',
-      fontSize: '20px',
-      fontWeight: '500',
-      marginBottom: '20px'
+    "& > p": {
+      color: "#009ADF",
+      backgroundColor: "#94dbfc",
+      padding: "10px",
+      fontSize: "20px",
+      fontWeight: "500",
+      marginBottom: "20px",
     },
 
-    '& input': {
-      color: '#666666',
-      marginBottom: '5px'
+    "& input": {
+      color: "#666666",
+      marginBottom: "5px",
     },
   },
 
   buttons: {
-    marginTop: '20px',
-    width: '100%',
-    display: 'flex',
-    gap: '20px',
-    justifyContent:"center",
-  }
+    marginTop: "20px",
+    width: "100%",
+    display: "flex",
+    gap: "20px",
+    justifyContent: "center",
+  },
 });
 
 const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
   const classes = useStyles();
-
   const [inputFields, setInputFields] = useState(initialValues);
 
   const [error, setError] = useState({
@@ -61,14 +60,19 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
     number: "",
   });
 
+  // API CEP
   const checkCEP = (e) => {
     const cep = e.target.value;
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
-    .then(res => res.json())
-    .then((data) => {
-        setInputFields({ ...inputFields, street: data.logradouro, city: data.localidade})
-    });
-  }
+      .then((res) => res.json())
+      .then((data) => {
+        setInputFields({
+          ...inputFields,
+          street: data.logradouro,
+          city: data.localidade,
+        });
+      });
+  };
 
   const handleSave = (e) => {
     e.preventDefault();
@@ -93,14 +97,12 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
   return (
     <Modal open={open}>
       <Paper className={classes.container}>
-        <Typography align="center">
-          Novo Paciente
-        </Typography>
+        <Typography align="center">Paciente</Typography>
         <form onSubmit={handleSave}>
           <Grid container spacing={1}>
             <Grid xs={12} item>
               <TextField
-              variant="standard"
+                variant="standard"
                 fullWidth
                 error={Boolean(error.name)}
                 helperText={error.name}
@@ -110,13 +112,13 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                 value={inputFields.name || ""}
                 onChange={(e) => {
                   if (!validName.test(e.target.value)) {
-                    setError({ ...error, name: "Nome inváldo" });
+                    setError({ ...error, name: "Nome inválido" });
                   } else {
                     setError({ ...error, name: "" });
                   }
                   setInputFields({
                     ...inputFields,
-                    name: e.target.value
+                    name: e.target.value,
                   });
                 }}
               />
@@ -140,15 +142,15 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                   }
                   setInputFields({
                     ...inputFields,
-                    email: e.target.value
+                    email: e.target.value,
                   });
                 }}
               />
             </Grid>
-            <Grid item xs={12} sm={6} >
+            <Grid item xs={12} sm={6}>
               <TextField
-              fullWidth
-              variant="standard"
+                fullWidth
+                variant="standard"
                 placeholder="Data de nascimento"
                 required
                 type="date"
@@ -156,15 +158,16 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                 onChange={(e) =>
                   setInputFields({
                     ...inputFields,
-                    date: e.target.value
+                    date: e.target.value,
                   })
                 }
               />
+
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-              variant="standard"
-              type='text'
+                variant="standard"
+                type="text"
                 placeholder="cidade"
                 fullWidth
                 required
@@ -180,8 +183,8 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
 
                   setInputFields({
                     ...inputFields,
-                    city: e.target.value
-                  })
+                    city: e.target.value,
+                  });
                 }}
               />
             </Grid>
@@ -206,7 +209,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
 
                   setInputFields({
                     ...inputFields,
-                    cep: e.target.value
+                    cep: e.target.value,
                   });
                 }}
               />
@@ -229,8 +232,8 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
 
                   setInputFields({
                     ...inputFields,
-                    street: e.target.value
-                  })
+                    street: e.target.value,
+                  });
                 }}
               />
             </Grid>
@@ -245,14 +248,18 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                 onChange={(e) =>
                   setInputFields({
                     ...inputFields,
-                    number: e.target.value
+                    number: e.target.value,
                   })
                 }
               />
             </Grid>
             <div className={classes.buttons}>
-              <Button variant="outlined" color="error" onClick={handleClose}>cancelar</Button>
-              <Button sx={{px: '30px'}} variant="contained" type="submit">Salvar</Button>
+              <Button variant="outlined" color="error" onClick={handleClose}>
+                cancelar
+              </Button>
+              <Button sx={{ px: "30px" }} variant="contained" type="submit">
+                Salvar
+              </Button>
             </div>
           </Grid>
         </form>

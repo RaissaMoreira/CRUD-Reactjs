@@ -7,12 +7,11 @@ import {
   TableRow,
   TableCell,
   Paper,
-  Typography
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ModeEditIcon from "@mui/icons-material/ModeEdit";
 import { useState, useEffect } from "react";
-import NewModal from "./Modal";
+import NewModal from "./NewModal";
 import { makeStyles } from "@mui/styles";
 import Header from "./Header";
 
