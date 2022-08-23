@@ -61,6 +61,15 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
     number: "",
   });
 
+  const checkCEP = (e) => {
+    const cep = e.target.value;
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+    .then(res => res.json())
+    .then((data) => {
+        setInputFields({ ...inputFields, street: data.logradouro, city: data.localidade})
+    });
+  }
+
   const handleSave = (e) => {
     e.preventDefault();
 
@@ -107,7 +116,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                   }
                   setInputFields({
                     ...inputFields,
-                    name: e.target.value,
+                    name: e.target.value
                   });
                 }}
               />
@@ -131,7 +140,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                   }
                   setInputFields({
                     ...inputFields,
-                    email: e.target.value,
+                    email: e.target.value
                   });
                 }}
               />
@@ -147,7 +156,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                 onChange={(e) =>
                   setInputFields({
                     ...inputFields,
-                    date: e.target.value,
+                    date: e.target.value
                   })
                 }
               />
@@ -171,7 +180,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
 
                   setInputFields({
                     ...inputFields,
-                    city: e.target.value,
+                    city: e.target.value
                   })
                 }}
               />
@@ -186,6 +195,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                 helperText={error.cep}
                 placeholder="cep"
                 required
+                onBlur={checkCEP}
                 value={inputFields.cep || ""}
                 onChange={(e) => {
                   if (Number(e.target.value.length) !== 8) {
@@ -196,7 +206,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
 
                   setInputFields({
                     ...inputFields,
-                    cep: e.target.value,
+                    cep: e.target.value
                   });
                 }}
               />
@@ -209,7 +219,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                 variant="standard"
                 error={Boolean(error.street)}
                 helperText={error.street}
-                value={inputFields.street || ""}
+                value={inputFields.street || " "}
                 onChange={(e) => {
                   if (!validString.test(e.target.value)) {
                     setError({ ...error, street: "Rua inválida" });
@@ -219,7 +229,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
 
                   setInputFields({
                     ...inputFields,
-                    street: e.target.value,
+                    street: e.target.value
                   })
                 }}
               />
@@ -235,7 +245,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                 onChange={(e) =>
                   setInputFields({
                     ...inputFields,
-                    number: e.target.value,
+                    number: e.target.value
                   })
                 }
               />
