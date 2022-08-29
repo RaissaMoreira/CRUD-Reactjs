@@ -97,7 +97,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
   return (
     <Modal open={open}>
       <Paper className={classes.container}>
-        <Typography align="center">Paciente</Typography>
+        <Typography align="center">Cadastro</Typography>
         <form onSubmit={handleSave}>
           <Grid container spacing={1}>
             <Grid xs={12} item>
@@ -112,7 +112,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                 value={inputFields.name || ""}
                 onChange={(e) => {
                   if (!validName.test(e.target.value)) {
-                    setError({ ...error, name: "Nome inválido" });
+                    setError({ ...error, name: "Nome inválido!" });
                   } else {
                     setError({ ...error, name: "" });
                   }
@@ -134,9 +134,9 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                 value={inputFields.email || ""}
                 onChange={(e) => {
                   if (data.find((item) => item.email === e.target.value)) {
-                    setError({ ...error, email: "Email já cadastrado" });
+                    setError({ ...error, email: "Email já cadastrado!" });
                   } else if (!validEmail.test(e.target.value)) {
-                    setError({ ...error, email: "Email inválido" });
+                    setError({ ...error, email: "Email inválido!" });
                   } else {
                     setError({ ...error, email: "" });
                   }
@@ -176,7 +176,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                 value={inputFields.city || ""}
                 onChange={(e) => {
                   if (!validString.test(e.target.value)) {
-                    setError({ ...error, city: "Cidade inválida" });
+                    setError({ ...error, city: "Cidade inválida!" });
                   } else {
                     setError({ ...error, city: "" });
                   }
@@ -216,16 +216,16 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
-                placeholder="rua"
                 required
                 fullWidth
+                placeholder="Rua"
                 variant="standard"
                 error={Boolean(error.street)}
                 helperText={error.street}
                 value={inputFields.street || " "}
                 onChange={(e) => {
                   if (!validString.test(e.target.value)) {
-                    setError({ ...error, street: "Rua inválida" });
+                    setError({ ...error, street: "Nome da rua inválido!" });
                   } else {
                     setError({ ...error, street: "" });
                   }

@@ -4,9 +4,6 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   header: {
-    display: 'flex',
-    justifyContent: 'space-between',
-
     '& button': {
       backgroundColor: '#002639',
       '&:hover': {
@@ -22,7 +19,6 @@ const Header = ({setDataEdit, handleOpen}) => {
   return (
     <AppBar>
       <Toolbar className={classes.header}>
-        <Typography sx={{fontSize: '23px', fontWeight: 'bold'}}>medcloud</Typography>
         <Button  variant="contained" startIcon={<PersonAddIcon/>} onClick={() => {setDataEdit({}), handleOpen()}}>cadastro</Button>
       </Toolbar>
     </AppBar>
