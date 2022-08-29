@@ -215,17 +215,17 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+            <TextField
+                placeholder="rua"
                 required
                 fullWidth
-                placeholder="Rua"
                 variant="standard"
                 error={Boolean(error.street)}
                 helperText={error.street}
-                value={inputFields.street || " "}
+                value={inputFields.street || ""}
                 onChange={(e) => {
                   if (!validString.test(e.target.value)) {
-                    setError({ ...error, street: "Nome da rua inválido!" });
+                    setError({ ...error, street: "Rua inválida" });
                   } else {
                     setError({ ...error, street: "" });
                   }
@@ -233,7 +233,7 @@ const NewModal = ({ open, handleClose, data, setData, initialValues }) => {
                   setInputFields({
                     ...inputFields,
                     street: e.target.value,
-                  });
+                  })
                 }}
               />
             </Grid>
